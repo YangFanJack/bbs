@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jack.dao.NoticeMapper">
+
+    <!--    开启二级缓存-->
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+
+    <!--    单个通知-->
+    <select id="queryNotice" parameterType="map" resultType="Notice">
+        select * from notice
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+        </where>
+    </select>
+    <!--    多通知分页查询-->
+    <select id="queryAllNotice" parameterType="map" resultType="Notice">
+        select * from notice order by id DESC
+        <if test="start != null and pageSize !=null">
+            limit #{start},#{pageSize}
+        </if>
+        <if test="counts != null">
+            limit #{counts}
+        </if>
+    </select>
+
+    <!--    计算数据总条数-->
+    <select id="getTotalCount" resultType="int">
+        select count(id) from notice
+    </select>
+
+    <!--增加一个Notice-->
+    <insert id="insertNotice" parameterType="Notice">
+      insert into notice(noticeTitle,noticeContent,noticeTime,managerId)
+      values (#{noticeTitle}, #{noticeContent}, #{noticeTime}, #{managerId.id})
+   </insert>
+
+</mapper>

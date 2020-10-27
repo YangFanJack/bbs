@@ -1,0 +1,99 @@
+html{
+    height: 100%;
+}
+body{
+    background: url("../img/0.png") repeat-x;
+    position: relative;
+    min-height: 100%;
+    /*height: 3000px;*/
+}
+
+.w{      /*固定元素宽度*/
+    width: 1000px;
+    margin: 0px auto;
+}
+/*解决高度塌陷问题和父子元素垂直外边距重叠问题*/
+
+.clearfix{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.header{
+    padding-top: 20px;
+    padding-bottom: 40px;
+    /* background-color: green; */
+}
+
+.logo{
+    margin-left: 15px;
+}
+
+.nav{
+    float: right;
+    margin-top: 22px;
+}
+
+.nav li{
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-left: 1px #d6d6d6 dotted;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+/*设置导航条链接样式*/
+.nav a{
+    font: bold 15px Georgia;
+    color: #666;
+    text-decoration: none;
+}
+
+/*chrome中字体最小12px*/
+.nav p{
+    color: #b7b7b7;
+    font: 11px tahoma;
+}
+
+.nav a:hover{
+    color: #a1a1a1;
+    text-decoration: underline;
+}
+
+
+
+/*底部栏样式*/
+.footer{
+    height: 173px;
+    background-color: #333;
+    border-top: 10px solid #4c4c4c;
+    position:absolute;
+    width: 1000px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.footer a,.footer p{
+    color: #999;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.footer .w{
+    padding-top: 30px;
+    
+}
+
+.footer p{
+    text-align: center;
+}
+
+.footer a:hover{
+    color: #cccaca;
+    text-decoration: underline;
+}

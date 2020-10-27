@@ -1,0 +1,71 @@
+/* 主内容 */
+.content{
+    padding-bottom: 220px;
+}
+.mainBody{
+    width: 800px;
+    background-color: white;
+    margin: 0px auto;
+    min-height: 350px;
+    /* background-image: url("/img/loginBack.jpg"); */
+}
+.userBar{
+    /* background-color: red; */
+    margin: 0 auto;
+    width: 100%;
+    border-bottom: 2px solid black;
+}
+.bar{
+    /* background-color: yellow; */
+    float: left;
+    margin: 10px 20px;
+    border: 2px solid black;
+}
+.bar a{
+    background-color: darkgrey;
+    display: block;
+    padding: 5px;
+    font:bold 15px arial,monospace;
+    text-decoration:none;
+    background-color: bisque;
+}
+.bar a:hover{
+    background-color: yellow;
+}
+.T{
+    border: 2px solid black;
+    margin: 10px 10px;
+    font:bold 20px arial,monospace;
+}
+.posts{
+    margin: 0 auto;
+    width: 90%;
+}
+.post{
+    /* background-color: green; */
+    margin: 25px auto;
+}
+.post .postHead{
+    text-align: left;
+    margin: 0 30px;
+    font: bold 20px "黑体";
+    /* background-color: red; */
+}
+.post .postContent{
+    font: italic 14px "微软雅黑";
+    margin-left: 30px;
+    margin-right: 30px;
+    border: yellow solid 2px;
+}
+.postList{
+    margin: 0 auto;
+    width: 100%;
+}
+.postList nav{
+    text-align: center;
+}
+
+.state{
+    text-align: right;
+    font: italic 13px monospace;
+}

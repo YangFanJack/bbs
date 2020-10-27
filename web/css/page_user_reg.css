@@ -1,0 +1,57 @@
+/* 主内容 */
+.content{
+    padding-bottom: 220px;
+}
+.login{
+    width: 800px;
+    background-color: white;
+    /* background-image: url("/img/loginBack.jpg"); */
+    margin: 0px auto;
+    min-height: 350px;
+}
+.login form{
+    width: 320px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+.login span{
+    display: block;
+    text-align: center;
+    font:bold 20px arial,monospace;
+    margin-top: 10px;
+}
+.login input{
+    float: left;
+    margin: 10px 10px 0px 10px;
+    opacity: 0.6;
+}
+.kuang{
+    display: block;
+    width: 300px;
+    height: 40px;
+    border: 1px solid black;
+    padding: 5px;
+}
+.cerCode1{
+    height: 40px;
+    width: 200px;
+    margin-left: 10px;
+    border: 1px solid black;
+    padding: 5px;
+    opacity: 0.6;
+}
+.cerCode2{
+    height: 40px;
+    width: 80px;
+    margin: 10px;
+}
+.login p{
+    font: 14px arial,monospace;
+    color: blue;
+    text-align: right;
+    margin-right: 250px;
+}
+.wide{
+    font:bold 18px arial,monospace;
+    color: black;
+}

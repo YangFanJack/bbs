@@ -1,0 +1,35 @@
+/* 主内容 */
+.content{
+    padding-bottom: 220px;
+}
+.noticeList{
+    width: 800px;
+    background-color: white;
+    margin: 0 auto;
+    min-height: 350px;
+}
+.notice{
+    margin: 15px auto;
+    width: 80%;
+    border: 2px solid black;
+}
+.noticeTitle{
+    text-align: center;
+    font:bold 18px arial,monospace;
+    margin: 5px auto;
+}
+.noticeTime{
+    text-align: center;
+    margin: 0 auto;
+    font: 12px arial,monospace;
+}
+.noticeContent{
+    margin: 0 auto;
+    font: 15px arial,monospace;
+    margin: 5px auto;
+}
+
+/* 分页 */
+.content nav{
+    text-align: center;
+}

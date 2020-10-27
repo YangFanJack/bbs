@@ -1,0 +1,76 @@
+/* 主内容 */
+.content{
+    padding-bottom: 220px;
+}
+.mainBody{
+    width: 800px;
+    background-color: white;
+    margin: 0px auto;
+    min-height: 350px;
+    /* background-image: url("/img/loginBack.jpg"); */
+}
+.userBar{
+    /* background-color: red; */
+    margin: 0 auto;
+    width: 100%;
+    border-bottom: 2px solid black;
+}
+.bar{
+    /* background-color: yellow; */
+    float: left;
+    margin: 10px 20px;
+    border: 2px solid black;
+}
+.bar a{
+    background-color: darkgrey;
+    display: block;
+    padding: 5px;
+    font:bold 15px arial,monospace;
+    text-decoration:none;
+    background-color: bisque;
+}
+.bar a:hover{
+    background-color: yellow;
+}
+.T{
+    border: 2px solid black;
+    margin: 10px 10px;
+    font:bold 20px arial,monospace;
+}
+.postList{
+    width: 100%;
+}
+.mainBody form{
+    width: 320px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+.mainBody input{
+    float: left;
+    margin: 10px 10px 0px 10px;
+    opacity: 0.6;
+}
+.kuang{
+    display: block;
+    width: 300px;
+    height: 40px;
+    border: 1px solid black;
+    padding: 5px;
+}
+.cerCode1{
+    height: 40px;
+    width: 200px;
+    margin-left: 10px;
+    border: 1px solid black;
+    padding: 5px;
+    opacity: 0.6;
+}
+.cerCode2{
+    height: 40px;
+    width: 80px;
+    margin: 10px;
+}
+.wide{
+    font:bold 18px arial,monospace;
+    color: black;
+}
