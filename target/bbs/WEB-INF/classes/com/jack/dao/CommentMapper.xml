@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jack.dao.CommentMapper">
+
+    <!--    开启二级缓存-->
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+
+    <!--    单个贴子-->
+    <select id="queryComment" parameterType="map" resultType="Comment">
+        select * from comment
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+        </where>
+    </select>
+
+
+    <!--    多评论分页查询-->
+    <resultMap id="CommentUser" type="Comment">
+        <result property="id" column="cid"/>
+        <result property="commentContent" column="commentContent"/>
+        <result property="commentTime" column="commentTime"/>
+        <association property="postId" javaType="Post">
+            <result property="id" column="pId"/>
+            <result property="postTitle" column="postTitle"/>
+        </association>
+        <association property="userId" javaType="User">
+            <result property="id" column="uId"/>
+            <result property="username" column="uname"/>
+        </association>
+    </resultMap>
+    <select id="queryAllComment" parameterType="map" resultMap="CommentUser">
+        select comment.id cid,commentContent,commentTime,post.id pId,post.postTitle,`user`.id uId,`user`.username uname
+        from post,`user`,comment
+        <where>
+            comment.postId=post.id and comment.userId=`user`.id
+            <if test="postId != null">
+                and post.id = #{postId}
+            </if>
+            <if test="userId != null">
+                and `user`.id=#{userId}
+            </if>
+        </where>
+        order by comment.id DESC
+        <if test="start != null and pageSize !=null">
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+
+
+    <!--    计算数据总条数-->
+    <select id="getTotalCount" parameterType="map" resultType="int">
+        select count(comment.id) from post,`user`,comment
+        where comment.postId=post.id and comment.userId=`user`.id and `user`.id=#{userId}
+    </select>
+
+
+    <!--增加一个Comment-->
+    <insert id="insertComment" parameterType="Comment">
+        INSERT INTO `comment`(commentContent,commentTime,postId,userId)
+        VALUE(#{commentContent},#{commentTime},#{postId.id},#{userId.id});
+    </insert>
+
+</mapper>

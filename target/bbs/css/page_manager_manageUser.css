@@ -1,0 +1,80 @@
+/* 主内容 */
+.content{
+    padding-bottom: 220px;
+}
+.mainBody{
+    width: 800px;
+    background-color: white;
+    margin: 0px auto;
+    min-height: 350px;
+    /* background-image: url("/img/loginBack.jpg"); */
+}
+.userBar{
+    /* background-color: red; */
+    margin: 0 auto;
+    width: 100%;
+    border-bottom: 2px solid black;
+}
+.bar{
+    /* background-color: yellow; */
+    float: left;
+    margin: 10px 20px;
+    border: 2px solid black;
+}
+.bar a{
+    background-color: darkgrey;
+    display: block;
+    padding: 5px;
+    font:bold 15px arial,monospace;
+    text-decoration:none;
+    background-color: bisque;
+}
+.bar a:hover{
+    background-color: yellow;
+}
+.T{
+    border: 2px solid black;
+    margin: 10px 10px;
+    font:bold 20px arial,monospace;
+}
+.postList{
+    width: 100%;
+}
+.users{
+    /* background-color: red; */
+    width: 90%;
+    margin: 0 auto;
+}
+.user{
+    /* background-color: yellow; */
+    width: 100%;
+    margin: 20px auto;
+    border: 1px solid black;
+    padding: 5px;
+}
+.userName,.userEmail,.userId{
+    float: left;
+    /* background-color: aqua; */
+    margin-left: 20px;
+}
+.userId span{
+    font:bold 17px arial,monospace;
+}
+.userEmail span{
+    font:bold 15px arial,monospace;
+}
+.userName span{
+    font:bold 18px arial,monospace;
+}
+.manButton{
+    float: right;
+    /* background-color: aqua; */
+}
+.manButton input{
+    width: 100px;
+}
+
+
+.postList nav{
+    text-align: center;
+}

@@ -1,0 +1,99 @@
+/* 主内容 */
+.content{
+    padding-bottom: 220px;
+}
+.mainBody{
+    width: 800px;
+    background-color: white;
+    margin: 0px auto;
+    min-height: 350px;
+    /* background-image: url("/img/loginBack.jpg"); */
+}
+.userBar{
+    /* background-color: red; */
+    margin: 0 auto;
+    width: 100%;
+    border-bottom: 2px solid black;
+}
+.bar{
+    /* background-color: yellow; */
+    float: left;
+    margin: 10px 20px;
+    border: 2px solid black;
+}
+.bar a{
+    background-color: darkgrey;
+    display: block;
+    padding: 5px;
+    font:bold 15px arial,monospace;
+    text-decoration:none;
+    background-color: bisque;
+}
+.bar a:hover{
+    background-color: yellow;
+}
+.T{
+    border: 2px solid black;
+    margin: 10px 10px;
+    font:bold 20px arial,monospace;
+}
+
+.detailPost{
+    width: 800px;
+    background-color: white;
+    margin: 0 auto;
+}
+.postTitle{
+    text-align: center;
+    font:bold 18px arial,monospace;
+    margin: 5px auto;
+}
+.cookie{
+    font: 12px arial,monospace;
+    margin: 0 auto;
+}
+.postMan{
+    margin: 5px 10px;
+    float: left;
+}
+.postCategory{
+    margin: 5px 10px;
+    float: left;
+}
+.postTime{
+    margin: 5px 10px;
+    float: left;
+}
+.postContent{
+    margin: 10px auto;
+    width: 90%;
+    border: 1px solid black;
+    padding: 10px 5px;
+    font: 15px arial,monospace;
+}
+
+.certifyButton{
+    width: 90%;
+    margin: 0 auto;
+    /* background-color: red; */
+}
+.certifyButton input:first-child {
+    float: left;
+    width: 300px;
+    height: 30px;
+    background-color:white;
+    font: bold 16px arial,monospace;
+    margin-bottom: 10px;
+
+}
+.certifyButton input:last-child {
+    float: right;
+    width: 300px;
+    height: 30px;
+    background-color: white;
+    font: bold 16px arial,monospace;
+    margin-bottom: 10px;
+}
+.certifyButton input:hover{
+    background-color: grey;
+}

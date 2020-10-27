@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jack.dao.PostMapper">
+
+    <!--    开启二级缓存-->
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+
+<!--    单个贴子-->
+    <select id="queryPost" parameterType="map" resultType="Post">
+        select * from post
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+        </where>
+    </select>
+
+
+<!--    查询单个贴子和用户和评论-->
+    <resultMap id="PostUser1" type="Post">
+        <result property="id" column="id"/>
+        <result property="postTitle" column="postTitle"/>
+        <result property="postContent" column="postContent"/>
+        <result property="postCategory" column="postCategory"/>
+        <result property="postTime" column="postTime"/>
+        <association property="userId" javaType="User">
+            <result property="id" column="uid"/>
+            <result property="username" column="uname"/>
+        </association>
+    </resultMap>
+    <select id="queryPostAndUser" parameterType="int" resultMap="PostUser1">
+        SELECT p.id,p.postTitle,p.postContent,p.postCategory,p.postTime,u1.id uid, u1.username uname
+        FROM `user` u1,post p
+        WHERE p.userId=u1.id AND p.id=#{postId}
+    </select>
+
+
+    <!--    多贴子分页查询-->
+    <resultMap id="PostUser" type="Post">
+        <result property="id" column="pid"/>
+        <result property="postTitle" column="postTitle"/>
+        <result property="postContent" column="postContent"/>
+        <result property="postCategory" column="postCategory"/>
+        <result property="certifyState" column="certifyState"/>
+        <result property="postTime" column="postTime"/>
+        <association property="userId" javaType="User">
+            <result property="id" column="uId"/>
+        </association>
+    </resultMap>
+    <select id="queryAllPost" parameterType="map" resultMap="PostUser">
+        select post.id pid,postTitle,postContent,postCategory,certifyState,postTime,`user`.id uId
+        from post,`user`
+
+        <where>
+            post.userId = `user`.id
+            <if test="postTitle != null">
+                and postTitle like #{postTitle}
+            </if>
+            <if test="postCategory != null and postCategory != 0">
+                and postCategory = #{postCategory}
+            </if>
+            <if test="certifyState != null and certifyState != 0">
+                and certifyState = #{certifyState}
+            </if>
+            <if test="userId != null and userId != 0">
+                and post.userId = #{userId}
+            </if>
+        </where>
+        order by post.id DESC
+        <if test="start != null and pageSize !=null">
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+
+
+<!--    计算数据总条数-->
+    <select id="getTotalCount" parameterType="map" resultType="int">
+        select count(post.id) from post,`user`
+        <where>
+            post.userId=`user`.id
+            <if test="postTitle != null">
+                and postTitle like #{postTitle}
+            </if>
+            <if test="postCategory != null and postCategory != 0">
+                and postCategory = #{postCategory}
+            </if>
+            <if test="certifyState != null and certifyState != 0">
+                and certifyState = #{certifyState}
+            </if>
+            <if test="userId != null and userId != 0">
+                and post.userId = #{userId}
+            </if>
+        </where>
+    </select>
+
+    <!--更新Post-->
+    <update id="updatePostById" parameterType="Post">
+        update post
+        set certifyState = 2
+        where id = #{id}
+    </update>
+
+    <!--增加一个Post-->
+    <insert id="insertPost" parameterType="Post">
+        insert into post(postTitle,postContent,postCategory,certifyState,postTime,userId)
+        values (#{postTitle}, #{postContent}, #{postCategory}, #{certifyState}, #{postTime}, #{userId.id})
+    </insert>
+
+<!--    删除Post-->
+    <delete id="deletePost" parameterType="int">
+        delete from post where id = #{postId}
+    </delete>
+</mapper>
