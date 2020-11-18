@@ -65,7 +65,6 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public int doPost(Post post) {
-        userMapper.addOnePostNum(post.getUserId().getId());
         return postMapper.insertPost(post);
     }
 
@@ -75,13 +74,15 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public int passPost(int postId) {
-        return postMapper.updatePostById(postId);
+    public int passPost(Post post) {
+        userMapper.addOnePostNum(post.getUserId().getId());
+        return postMapper.updatePostById(post.getId());
     }
 
     @Override
-    public boolean deletePost(int postId) {
-        int i = postMapper.deletePost(postId);
+    public boolean deletePost(Post post) {
+        userMapper.addOneDelPostNum(post.getUserId().getId());
+        int i = postMapper.deletePost(post.getId());
         if(i!=0){
             return true;
         }

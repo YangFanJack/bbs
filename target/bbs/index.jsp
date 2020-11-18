@@ -51,7 +51,7 @@
                 <p>ABOUT POST</p>
             </li>
             <li>
-                <a href="showNotice">网站通知</a>
+                <a href="showNotice?fromUrl=notice">网站通知</a>
                 <p>THE NOTIFICATION</p>
             </li>
             <li>
@@ -129,7 +129,7 @@
                 <c:forEach items="${someNotice}" var="keyword" varStatus="id">
                     <div class="item">
                         <hr>
-                        <p class="p2"><a href="showNotice">${keyword.noticeTitle}</a></p>
+                        <p class="p2"><a href="showNotice?fromUrl=notice">${keyword.noticeTitle}</a></p>
                         <hr>
                     </div>
                 </c:forEach>
@@ -142,7 +142,7 @@
                 <c:forEach items="${postPageBean.list}" var="keyword" varStatus="id">
                     <div class="post">
                         <p class="postHead"><a href="detailPost?postId=${keyword.id}">${keyword.postTitle}</a></p>
-                        <p class="postContent">${fn:substring(keyword.postContent, 0, 80)}. . . . . .</p>
+                        <div class="postContent">${fn:substring(keyword.postContent, 0, 80)}. . . . . .</div>
                     </div>
                 </c:forEach>
             </div>
@@ -186,7 +186,7 @@
             <p class="p1">My Information</p>
             <div id="afterLogin">
                 <hr>
-                <p>欢迎你,<span>${sessionScope.currentUser}</span></p>
+                <p><span>欢迎你,${sessionScope.currentUser}</span></p>
                 <hr>
                 <p><a href="showPost1">我的主页</a></p>
                 <p><a href="userExit">退出登录</a></p>
@@ -194,6 +194,7 @@
                 <hr>
                 <p>发帖数：<span>${userInfo.postNum}</span></p>
                 <p>评论数：<span>${userInfo.commentNum}</span></p>
+                <p>删帖数：<span>${userInfo.delPostNum}</span></p>
                 <hr>
             </div>
             <div id="beforeLogin">
@@ -212,7 +213,7 @@
                 <a href="initIndex">网站主页</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="about.jsp">关于我们</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="understand.jsp">发帖须知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="showNotice">网站通知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="showNotice?fromUrl=notice">网站通知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
             </p>
             <br/>
             <p>版权所有 YangfanJack1024</p>

@@ -12,7 +12,7 @@
     <select id="queryNotice" parameterType="map" resultType="Notice">
         select * from notice
         <where>
-            <if test="id != null">
+            <if test="id != null and id != 0">
                 id = #{id}
             </if>
         </where>
@@ -38,5 +38,10 @@
       insert into notice(noticeTitle,noticeContent,noticeTime,managerId)
       values (#{noticeTitle}, #{noticeContent}, #{noticeTime}, #{managerId.id})
    </insert>
+
+    <!--    删除Post-->
+    <delete id="deleteNotice" parameterType="int">
+        delete from notice where id = #{id}
+    </delete>
 
 </mapper>

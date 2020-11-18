@@ -12,9 +12,10 @@ body{
     width: 1000px;
     margin: 0px auto;
 }
-/*解决高度塌陷问题和父子元素垂直外边距重叠问题*/
 
-.clearfix{
+/*解决高度塌陷问题和父子元素垂直外边距重叠问题*/
+.clearfix:before,
+.clearfix:after{
     content: "";
     display: table;
     clear: both;

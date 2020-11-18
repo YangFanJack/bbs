@@ -9,7 +9,7 @@ public interface UserService {
     public User getUserByName(String username);
     public User getUserById(int id);
     public int getIdByName(String username);
-    public boolean changePwd(User user);
+    public boolean updateUser(User user);
     public User getUserByIdPwd(int userId,String password);
     public PageBean<User> getAllUserByPage(int currentPage, int pageSize);
     public boolean deleteUser(int userId);

@@ -51,6 +51,7 @@
 .cookie{
     font: 12px arial,monospace;
     margin: 0 auto;
+    width: 600px;
 }
 .postMan{
     margin: 5px 10px;

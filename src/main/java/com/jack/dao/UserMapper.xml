@@ -12,7 +12,7 @@
     <select id="queryUser" parameterType="map" resultType="User">
         select * from `user`
         <where>
-            <if test="id != null">
+            <if test="id != null and id != 0">
                 id = #{id}
             </if>
             <if test="username != null">
@@ -46,22 +46,33 @@
 
     <!--更新User-->
     <update id="updateUser" parameterType="User">
-        update `user` set password = #{password}
+        update `user`
+        <set>
+            <if test="password != null">
+                password = #{password}
+            </if>
+            <if test="status != null">
+                status = #{status}
+            </if>
+        </set>
         <where>
-            <if test="id != null">
+            <if test="id != null and id != 0">
                 id = #{id}
             </if>
             <if test="username != null">
                 username = #{username}
+            </if>
+            <if test="activeCode != null">
+                activeCode = #{activeCode}
             </if>
         </where>
     </update>
 
     <!--增加一个User-->
     <insert id="insertUser" parameterType="User">
-      insert into `user`(username,password,email,postNum,commentNum)
-      values (#{username}, #{password}, #{email}, #{postNum}, #{commentNum})
-   </insert>
+      insert into `user`(username,password,email,postNum,commentNum,delPostNum,status,activeCode)
+      values (#{username}, #{password}, #{email}, #{postNum}, #{commentNum}, #{delPostNum}, 1, #{activeCode})
+    </insert>
 
     <!--    计算数据总条数-->
     <select id="getTotalCount" parameterType="map" resultType="int">

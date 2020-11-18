@@ -10,4 +10,5 @@ public interface NoticeMapper {
     public List<Notice> queryAllNotice(Map<String,Object> parameters);
     public int insertNotice(Notice notice);
     public int getTotalCount();
+    public int deleteNotice(int id);
 }

@@ -17,5 +17,7 @@ public interface UserMapper {
     public void addOneCommentNum(int userId);
     @Update("UPDATE `user` SET postNum=postNum+1 where id=#{userId}")
     public void addOnePostNum(int userId);
+    @Update("UPDATE `user` SET delPostNum=delPostNum+1 where id=#{userId}")
+    public void addOneDelPostNum(int userId);
     public int deleteUser(int userId);
 }

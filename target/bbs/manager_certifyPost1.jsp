@@ -33,7 +33,7 @@
                 <p>ABOUT POST</p>
             </li>
             <li>
-                <a href="notice.jsp">网站通知</a>
+                <a href="showNotice?fromUrl=notice">网站通知</a>
                 <p>THE NOTIFICATION</p>
             </li>
             <li>
@@ -72,6 +72,9 @@
                 <div class="bar">
                     <a href="manager_doNotice.jsp">发布通知</a>
                 </div>
+                <div class="bar">
+                    <a href="showNotice?fromUrl=manager_manageNotice1">通知管理</a>
+                </div>
             </div>
             <div class="postList clearfix">
                 <span class="T">审核贴子</span>
@@ -79,7 +82,7 @@
                     <c:forEach items="${postPageBean.list}" var="keyword" varStatus="id">
                         <div class="post">
                             <p class="postHead"><a href="certifyPost2?postId=${keyword.id}">${keyword.postTitle}</a></p>
-                            <p class="postContent">${fn:substring(keyword.postContent, 0, 40)}. . . . . .</p>
+                            <div class="postContent">${fn:substring(keyword.postContent, 0, 40)}. . . . . .</div>
                         </div>
                     </c:forEach>
                 </div>
@@ -127,7 +130,7 @@
                 <a href="initIndex">网站主页</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="about.jsp">关于我们</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="understand.jsp">发帖须知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="showNotice">网站通知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="showNotice?fromUrl=notice">网站通知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
             </p>
             <br/>
             <p>版权所有 YangfanJack1024</p>

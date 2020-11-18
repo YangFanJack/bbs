@@ -1,8 +1,6 @@
 package com.jack.controller;
 
-import com.jack.pojo.Manager;
-import com.jack.pojo.Notice;
-import com.jack.pojo.PageBean;
+import com.jack.pojo.*;
 import com.jack.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,8 +17,16 @@ public class NoticeController {
     @Qualifier("NoticeServiceImpl")
     private NoticeService noticeService;
 
+    @RequestMapping("oneNotice")
+    public String oneNotice(String id, Model model, HttpSession session){
+        int id0 = Integer.parseInt(id);
+        Notice notice = noticeService.getNotice(id0);
+        model.addAttribute("notice",notice);
+        return "manager_manageNotice2";
+    }
+
     @RequestMapping("showNotice")
-    public String showNotice(String totalPage, String currentPage, Model model, HttpSession session){
+    public String showNotice(String fromUrl, String totalPage, String currentPage, Model model, HttpSession session){
         int currentPage0 = 0;
         if(currentPage!=null&&!currentPage.equals("")){
             currentPage0 = Integer.parseInt(currentPage);
@@ -40,7 +46,12 @@ public class NoticeController {
         int pageSize = 5;
         PageBean<Notice> noticePageBean = noticeService.getAllNoticeByPage(currentPage0, pageSize);
         model.addAttribute("noticePageBean",noticePageBean);
-        return "notice";
+        if(fromUrl.equals("notice")){
+            return "notice";
+        }
+        else{
+            return "manager_manageNotice1";
+        }
     }
 
     @RequestMapping("doNotice")
@@ -74,5 +85,24 @@ public class NoticeController {
             model.addAttribute("msg","内容不能为空!");
         }
         return "manager_doNotice";
+    }
+
+    @RequestMapping("deleteNotice")
+    public String deleteNotice(String id, Model model, HttpSession session){
+        int id0 = 0;
+        if(id!=null&&!id.equals("")){
+            id0 = Integer.parseInt(id);
+        }
+//        删帖
+        boolean result = noticeService.deleteNotice(id0);
+        String msg;
+        if(result){
+            msg="删除通知成功!";
+        }
+        else {
+            msg="删除通知失败!";
+        }
+        model.addAttribute("msg",msg);
+        return "redirect:/showNotice?fromUrl=manager_manageNotice1";
     }
 }

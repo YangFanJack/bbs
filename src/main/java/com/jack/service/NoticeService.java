@@ -9,4 +9,6 @@ public interface NoticeService{
     public PageBean<Notice> getAllNoticeByPage(int currentPage, int pageSize);
     public List<Notice> getSomeNotice(int counts);
     public int doNotice(Notice notice);
+    public Notice getNotice(int id);
+    public boolean deleteNotice(int id);
 }

@@ -43,7 +43,7 @@
                 <p>ABOUT POST</p>
             </li>
             <li>
-                <a href="showNotice">网站通知</a>
+                <a href="showNotice?fromUrl=notice">网站通知</a>
                 <p>THE NOTIFICATION</p>
             </li>
             <li>
@@ -85,7 +85,7 @@
                 <a href="initIndex">网站主页</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="about.jsp">关于我们</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="understand.jsp">发帖须知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="showNotice">网站通知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="showNotice?fromUrl=notice">网站通知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
             </p>
             <br/>
             <p>版权所有 YangfanJack1024</p>

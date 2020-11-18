@@ -58,4 +58,23 @@ public class NoticeServiceImpl implements NoticeService {
         managerMapper.addOneNoticeNum(notice.getManagerId().getId());
         return noticeMapper.insertNotice(notice);
     }
+
+    @Override
+    public Notice getNotice(int id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id",id);
+        Notice notice = noticeMapper.queryNotice(map);
+        return notice;
+    }
+
+    @Override
+    public boolean deleteNotice(int id) {
+        int i = noticeMapper.deleteNotice(id);
+        if(i!=0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

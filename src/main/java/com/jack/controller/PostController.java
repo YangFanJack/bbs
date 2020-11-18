@@ -1,13 +1,7 @@
 package com.jack.controller;
 
-import com.jack.pojo.Comment;
-import com.jack.pojo.PageBean;
-import com.jack.pojo.Post;
-import com.jack.pojo.User;
-import com.jack.service.CommentService;
-import com.jack.service.MailSenderSrvService;
-import com.jack.service.PostService;
-import com.jack.service.UserService;
+import com.jack.pojo.*;
+import com.jack.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -17,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -34,6 +29,9 @@ public class PostController {
     @Autowired
     @Qualifier("MailSenderSrvServiceImpl")
     private MailSenderSrvService mailSenderSrvService;
+    @Autowired
+    @Qualifier("MessageServiceImpl")
+    private MessageService messageService;
 
     @RequestMapping("detailPost")
     public String detailPost(@ModelAttribute("msg") String msg, String postId, Model model, HttpSession session){
@@ -105,8 +103,6 @@ public class PostController {
         Timestamp t = new Timestamp(System.currentTimeMillis());
         post.setPostTime(t);
 
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println(post);
         //处理Post
         if(postContent!=null && !postContent.equals("") && postTitle!=null && !postTitle.equals("")){
             int i = postService.doPost(post);
@@ -145,6 +141,8 @@ public class PostController {
 
         int pageSize = 5;
         PageBean<Post> postPageBean = postService.getAllPostByPage(currentPage0, pageSize,null,0,1, 0);
+        //先提交审核的贴子应该排在前面
+        Collections.reverse(postPageBean.getList());
         model.addAttribute("postPageBean",postPageBean);
         return "manager_certifyPost1";
     }
@@ -160,15 +158,53 @@ public class PostController {
 
     @RequestMapping("outPost")
     public String outPost(String postId, Model model, HttpSession session){
-        int postId0 = Integer.parseInt(postId);
+        int postId0 = 0;
+        if(postId!=null&&!postId.equals("")){
+            postId0 = Integer.parseInt(postId);
+        }
+        //        发提示邮件
+//        Post post = postService.getPostById(postId0);
+//        Post postAndUser = postService.getPostAndUser(postId0);
+//        User user = userService.getUserById(postAndUser.getUserId().getId());
+//        String mail = user.getEmail();
+//        String subject = "一人贴吧贴子审核失败通知";
+//        String text = "由于您的标题为'"+post.getPostTitle()+"'的贴子内容违反网站规定，所以审核失败，望周知。";
+//        mailSenderSrvService.sendEmail(mail,subject,text);
+
+        //发审核失败消息
+        Post postAndUser = postService.getPostAndUser(postId0);
+        Message message = new Message();
+        message.setMsgCategory(3);
+        message.setMsgContent("由于您的标题为 <span style=\"color:orange\">\""+postAndUser.getPostTitle()+"\"</span> 的贴子内容违反网站规定，所以审核失败，望周知。");
+        Timestamp t = new Timestamp(System.currentTimeMillis());
+        message.setMsgTime(t);
+        message.setUserId(postAndUser.getUserId().getId());
+        message.setIsRead(1);
+        boolean b = messageService.addMessage(message);
+
         postService.outPost(postId0);
         return "redirect:/certifyPost1";
     }
 
     @RequestMapping("passPost")
     public String passPost(String postId, Model model, HttpSession session){
-        int postId0 = Integer.parseInt(postId);
-        postService.passPost(postId0);
+        int postId0 = 0;
+        if(postId!=null&&!postId.equals("")){
+            postId0 = Integer.parseInt(postId);
+        }
+
+        //发审核通过消息
+        Post postAndUser = postService.getPostAndUser(postId0);
+        Message message = new Message();
+        message.setMsgCategory(2);
+        message.setMsgContent("您的标题为 <span style=\"color:orange\">\""+postAndUser.getPostTitle()+"\"</span> 的贴子已经通过审核，<a href='detailPost?postId="+postAndUser.getId()+"'>快去看看吧！</a>");
+        Timestamp t = new Timestamp(System.currentTimeMillis());
+        message.setMsgTime(t);
+        message.setUserId(postAndUser.getUserId().getId());
+        message.setIsRead(1);
+        boolean b = messageService.addMessage(message);
+
+        postService.passPost(postAndUser);
         return "redirect:/certifyPost1";
     }
 
@@ -191,27 +227,44 @@ public class PostController {
         }
 
         int pageSize = 5;
-        PageBean<Post> postPageBean = postService.getAllPostByPage(currentPage0, pageSize,null, 0, 0, 0);
+        PageBean<Post> postPageBean = postService.getAllPostByPage(currentPage0, pageSize,null, 0, 2, 0);
         model.addAttribute("postPageBean",postPageBean);
         return "manager_managePost";
     }
 
     @RequestMapping("deletePost")
-    public String deletePost(String postId, Model model, HttpSession session){
+    public String deletePost(String postId, String fromUrl, Model model, HttpSession session){
         int postId0 = 0;
         if(postId!=null&&!postId.equals("")){
             postId0 = Integer.parseInt(postId);
         }
 //        发提示邮件
-        Post post = postService.getPostById(postId0);
+//        Post post = postService.getPostById(postId0);
+//        Post postAndUser = postService.getPostAndUser(postId0);
+//        User user = userService.getUserById(postAndUser.getUserId().getId());
+//        String mail = user.getEmail();
+//        String subject = "一人贴吧删除贴子通知";
+//        String text = "由于您的标题为'"+post.getPostTitle()+"'的贴子内容违反网站规定，现已删除您的这篇贴子，与这篇贴子有关的所有内容已被删除，望周知。";
+//        mailSenderSrvService.sendEmail(mail,subject,text);
+
+        //发管理员&用户删帖消息
         Post postAndUser = postService.getPostAndUser(postId0);
-        User user = userService.getUserById(postAndUser.getUserId().getId());
-        String mail = user.getEmail();
-        String subject = "一人论坛删除贴子通知";
-        String text = "由于您的标题为'"+post.getPostTitle()+"'的贴子内容违反网站规定，现已删除您的这篇贴子，与这篇贴子有关的所有内容已被删除，望周知。";
-        mailSenderSrvService.sendEmail(mail,subject,text);
+        Message message = new Message();
+        Timestamp t = new Timestamp(System.currentTimeMillis());
+        message.setMsgTime(t);
+        message.setUserId(postAndUser.getUserId().getId());
+        message.setIsRead(1);
+        if(fromUrl.equals("user")){
+            message.setMsgCategory(5);
+            message.setMsgContent("删除标题为'"+postAndUser.getPostTitle()+"'的贴子成功！");
+        }
+        else{
+            message.setMsgCategory(4);
+            message.setMsgContent("由于您的标题为 <span style=\"color:orange\">\""+postAndUser.getPostTitle()+"\"</span> 的贴子内容违反网站规定，现已删除您的这篇贴子，与这篇贴子有关的所有内容已被删除，望周知。");
+        }
+        boolean b = messageService.addMessage(message);
 //        删帖
-        boolean result = postService.deletePost(postId0);
+        boolean result = postService.deletePost(postAndUser);
         String msg;
         if(result){
             msg="删除贴子成功!";
@@ -220,6 +273,11 @@ public class PostController {
             msg="删除贴子失败!";
         }
         model.addAttribute("msg",msg);
-        return "redirect:/showAllPost";
+        if(fromUrl.equals("user")){
+            return "redirect:/showPost1";
+        }
+        else{
+            return "redirect:/showAllPost";
+        }
     }
 }

@@ -69,3 +69,13 @@
     text-align: right;
     font: italic 13px monospace;
 }
+
+.post button{
+    float:right;
+    height: 20px;
+    width:50px;
+    font-size: 10px;
+    margin-right: 50px;
+    border: 2px solid gray;
+    background-color: white;
+}

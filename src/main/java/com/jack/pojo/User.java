@@ -16,6 +16,9 @@ public class User {
     private String email;
     private int postNum;
     private int commentNum;
+    private int delPostNum;
+    private int status;
+    private String activeCode;
     private List<Comment> commentList;
     private List<Post> postList;
 }

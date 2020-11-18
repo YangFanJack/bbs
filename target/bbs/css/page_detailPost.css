@@ -16,6 +16,7 @@
 .cookie{
     font: 12px arial,monospace;
     margin: 0 auto;
+    width: 600px;
 }
 .postMan{
     margin: 5px 10px;
@@ -52,7 +53,6 @@
 .commentUser{
     font:italic 14px arial,monospace;
     float: left;
-
 }
 .commentTime{
     font:italic 14px arial,monospace;

@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
         parameters.put("username",user.getUsername());
         parameters.put("password",user.getPassword());
         User result = userMapper.queryUser(parameters);
-        if(result!=null){
+        if(result!=null && result.getStatus()==2){
             return true;
         }
         else{
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean changePwd(User user) {
+    public boolean updateUser(User user) {
         try {
             int result = userMapper.updateUser(user);
             if(result!=0){

@@ -22,12 +22,75 @@
     <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.js"></script>
     <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
     <script>
+        function checkUsername() {
+            var username = $("#username").val();
+            var reg_username = /^\w{8,20}$/;
+            var flag = reg_username.test(username);
+            if(flag){
+                $("#username").css("border","");
+            }
+            else{
+                $("#username").css("border","2px solid red");
+            }
+            return flag;
+        }
+        function checkPassword() {
+            var password = $("#password").val();
+            var reg_password = /^\w{8,20}$/;
+            var flag = reg_password.test(password);
+            if(flag){
+                $("#password").css("border","");
+            }
+            else{
+                $("#password").css("border","2px solid red");
+            }
+            return flag;
+        }
+        function checkNewPassword() {
+            var password = $("#newPassword").val();
+            var reg_password = /^\w{8,20}$/;
+            var flag = reg_password.test(password);
+            if(flag){
+                $("#newPassword").css("border","");
+            }
+            else{
+                $("#newPassword").css("border","2px solid red");
+            }
+            return flag;
+        }
+        function checkEmail() {
+            var email = $("#email").val();
+            var reg_email =  /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/;
+            var flag = reg_email.test(email);
+            if(flag){
+                $("#email").css("border","");
+            }
+            else{
+                $("#email").css("border","2px solid red");
+            }
+            return flag;
+        }
+
+        function isSubmit(){
+            if(checkUsername() && checkPassword() && checkNewPassword() && checkEmail()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
         $(function (){
             //验证码
             $("#checkCode").click(function (){
                 var date = new Date().getTime();
                 this.src = "checkCode?signal="+date;
             })
+
+            //正则检查字符串合法性
+            $("#username").blur(checkUsername);
+            $("#password").blur(checkPassword);
+            $("#newPassword").blur(checkNewPassword);
+            $("#email").blur(checkEmail);
         })
 
     </script>
@@ -42,7 +105,7 @@
                 <p>ABOUT POST</p>
             </li>
             <li>
-                <a href="showNotice">网站通知</a>
+                <a href="showNotice?fromUrl=notice">网站通知</a>
                 <p>THE NOTIFICATION</p>
             </li>
             <li>
@@ -66,11 +129,11 @@
     <div class="content w clearfix">
         <div class="login clearfix">
             <span>用户注册</span>
-            <form class=" clearfix" action="userRegister">
-                <input class="kuang" type="text" placeholder="填写用户名" name="username">
-                <input class="kuang" type="password" placeholder="填写密码" name="password">
-                <input class="kuang" type="password" placeholder="确认密码" name="newPassword">
-                <input class="kuang" type="text" placeholder="填写邮箱" name="email">
+            <form class=" clearfix" action="userRegister" onsubmit="return isSubmit();">
+                <input id="username" class="kuang" type="text" placeholder="填写用户名" name="username">
+                <input id="password" class="kuang" type="password" placeholder="填写密码" name="password">
+                <input id="newPassword" class="kuang" type="password" placeholder="确认密码" name="newPassword">
+                <input id="email" class="kuang" type="text" placeholder="填写邮箱" name="email">
                 <input class="cerCode1" type="text" placeholder="填写验证码" name="checkCode">
                 <img class="cerCode2" id="checkCode" src="checkCode">
                 <input class="kuang wide" type="submit" value="注册">
@@ -87,7 +150,7 @@
                 <a href="initIndex">网站主页</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="about.jsp">关于我们</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="understand.jsp">发帖须知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="showNotice">网站通知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="showNotice?fromUrl=notice">网站通知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
             </p>
             <br/>
             <p>版权所有 YangfanJack1024</p>

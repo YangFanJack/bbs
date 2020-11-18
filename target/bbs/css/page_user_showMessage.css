@@ -1,0 +1,79 @@
+/* 主内容 */
+.content{
+    padding-bottom: 200px;
+}
+.mainBody{
+    width: 800px;
+    background-color: white;
+    margin: 0px auto;
+    min-height: 350px;
+    /* background-image: url("/img/loginBack.jpg"); */
+}
+.userBar{
+    /* background-color: red; */
+    margin: 0 auto;
+    width: 100%;
+    border-bottom: 2px solid black;
+}
+.bar{
+    /* background-color: yellow; */
+    float: left;
+    margin: 10px 20px;
+    border: 2px solid black;
+}
+.bar a{
+    background-color: darkgrey;
+    display: block;
+    padding: 5px;
+    font:bold 15px arial,monospace;
+    text-decoration:none;
+    background-color: bisque;
+}
+.bar a:hover{
+    background-color: yellow;
+}
+.T{
+    border: 2px solid black;
+    margin: 10px 10px;
+    font:bold 20px arial,monospace;
+}
+.postList{
+    margin: 0 auto;
+    width: 100%;
+}
+.postList nav{
+    text-align: center;
+}
+.messages{
+    margin: 0 auto;
+    width: 90%;
+}
+.message{
+    margin: 25px auto;
+    border: 1px solid orange;
+}
+.message .up{
+    width: 100%;
+    border-bottom: 1px solid orange;
+}
+.message .down{
+    width: 100%;
+    height: 50px;
+}
+.up .left{
+    width: 300px;
+    float: left;
+}
+.up .middle1{
+    width: 200px;
+    float: right;
+}
+.up .middle2{
+    width: 100px;
+    float: right;
+}
+.up .right{
+    width: 50px;
+    float: right;
+}
+

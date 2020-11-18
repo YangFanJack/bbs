@@ -32,7 +32,7 @@
                 <p>ABOUT POST</p>
             </li>
             <li>
-                <a href="showNotice">网站通知</a>
+                <a href="showNotice?fromUrl=notice">网站通知</a>
                 <p>THE NOTIFICATION</p>
             </li>
             <li>
@@ -71,6 +71,9 @@
                 <div class="bar">
                     <a href="manager_doNotice.jsp">发布通知</a>
                 </div>
+                <div class="bar">
+                    <a href="showNotice?fromUrl=manager_manageNotice1">通知管理</a>
+                </div>
             </div>
             <div class="postList clearfix">
                 <span class="T">用户管理</span>
@@ -84,10 +87,14 @@
                                 <span>${keyword.username}</span>
                             </div>
                             <div class="userEmail">
-                                <span> (${keyword.email})</span>
+                                <span> (${keyword.email}
+                                    <c:if test="${keyword.status ==1 }">
+                                        <span style="color: red">未激活</span>
+                                    </c:if>
+                                    )</span>
                             </div>
                             <div class="manButton">
-                                <input onclick="window.location='deleteUser?userId=${keyword.id}'" type="button" class="deleteButton" value="删除用户">
+                                <input onclick="window.location='deleteUser?userId=${keyword.id}'" type="button" class="deleteButton" value="删除">
                             </div>
                         </div>
                     </c:forEach>
@@ -136,7 +143,7 @@
                 <a href="initIndex">网站主页</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="about.jsp">关于我们</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="understand.jsp">发帖须知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="showNotice">网站通知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="showNotice?fromUrl=notice">网站通知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
             </p>
             <br/>
             <p>版权所有 YangfanJack1024</p>

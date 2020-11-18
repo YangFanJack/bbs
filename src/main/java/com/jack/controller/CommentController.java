@@ -1,10 +1,9 @@
 package com.jack.controller;
 
-import com.jack.pojo.Comment;
-import com.jack.pojo.PageBean;
-import com.jack.pojo.Post;
-import com.jack.pojo.User;
+import com.jack.pojo.*;
 import com.jack.service.CommentService;
+import com.jack.service.MessageService;
+import com.jack.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -19,6 +18,12 @@ public class CommentController {
     @Autowired
     @Qualifier("CommentServiceImpl")
     private CommentService commentService;
+    @Autowired
+    @Qualifier("PostServiceImpl")
+    private PostService postService;
+    @Autowired
+    @Qualifier("MessageServiceImpl")
+    private MessageService messageService;
 
     @RequestMapping("doComment")
     public String doComment(String commentContent,String postId, Model model, HttpSession session){
@@ -46,6 +51,15 @@ public class CommentController {
 
         //处理Comment
         if(commentContent!=null && !commentContent.equals("")){
+            //发评论消息
+            Post postAndUser = postService.getPostAndUser(postId0);
+            Message message = new Message();
+            message.setMsgCategory(1);
+            message.setMsgContent("用户"+postAndUser.getUserId().getUsername()+"在你的标题为 <span style=\"color:orange\">\""+postAndUser.getPostTitle()+"\"</span> 的贴子下评论了，<a href='detailPost?postId="+postAndUser.getId()+"'>快去看看吧！</a>");
+            message.setMsgTime(t);
+            message.setUserId(postAndUser.getUserId().getId());
+            message.setIsRead(1);
+            boolean b = messageService.addMessage(message);
             int i = commentService.doComment(comment);
             if(i != 0){
                 model.addAttribute("msg","提交成功!");

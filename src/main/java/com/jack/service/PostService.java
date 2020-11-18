@@ -8,7 +8,7 @@ public interface PostService {
     public Post getPostAndUser(int postId);
     public int doPost(Post post);
     public int outPost(int postId);
-    public int passPost(int postId);
-    public boolean deletePost(int postId);
+    public int passPost(Post post);
+    public boolean deletePost(Post post);
     public Post getPostById(int id);
 }

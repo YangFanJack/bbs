@@ -27,6 +27,8 @@
     margin: 0 auto;
     font: 15px arial,monospace;
     margin: 5px auto;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 /* 分页 */

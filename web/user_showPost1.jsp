@@ -33,7 +33,7 @@
                 <p>ABOUT POST</p>
             </li>
             <li>
-                <a href="showNotice">网站通知</a>
+                <a href="showNotice?fromUrl=notice">网站通知</a>
                 <p>THE NOTIFICATION</p>
             </li>
             <li>
@@ -69,14 +69,18 @@
                 <div class="bar">
                     <a href="user_doPost.jsp">我要发贴</a>
                 </div>
+                <div class="bar">
+                    <a href="showMessage">我的消息</a>
+                </div>
             </div>
             <div class="postList clearfix">
                 <span class="T">我的贴子</span>
                 <div class="posts clearfix">
                     <c:forEach items="${postPageBean.list}" var="keyword" varStatus="id">
                         <div class="post">
+                            <a href="deletePost?postId=${keyword.id}&fromUrl=user"><button>删 除</button></a>
                             <p class="postHead"><a href="showPost2?postId=${keyword.id}">${keyword.postTitle}</a></p>
-                            <p class="postContent">${fn:substring(keyword.postContent, 0, 80)}. . . . . .</p>
+                            <div class="postContent">${fn:substring(keyword.postContent, 0, 80)}. . . . . .</div>
                             <p class="state">审核状态:
                             <span>
                                 <c:if test="${keyword.certifyState==2}">
@@ -133,7 +137,7 @@
                 <a href="initIndex">网站主页</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="about.jsp">关于我们</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="understand.jsp">发帖须知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="showNotice">网站通知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="showNotice?fromUrl=notice">网站通知</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
             </p>
             <br/>
             <p>版权所有 YangfanJack1024</p>

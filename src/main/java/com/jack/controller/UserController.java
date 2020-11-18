@@ -4,6 +4,7 @@ import com.jack.pojo.PageBean;
 import com.jack.pojo.User;
 import com.jack.service.MailSenderSrvService;
 import com.jack.service.UserService;
+import com.jack.utils.UuidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -74,17 +75,48 @@ public class UserController {
             return "user_reg";
         }
         else {
+            //设置激活码，唯一
+            user.setActiveCode(UuidUtil.getUuid());
             boolean isLogin = userService.register(user);
             if(isLogin){
-                msg="注册成功，请登录!";
-                model.addAttribute("msg",msg);
-                return "user_login";
-            }
-            else{
-                msg = "用户名或者邮箱已被注册!";
+                //发送激活账号邮件
+                String mail = user.getEmail();
+                String subject = "一人贴吧帐号激活通知";
+                String text = "<a href = 'http://localhost:8080/bbs_war_exploded/activateStatus?activeCode="+user.getActiveCode()+"'>点击激活账号【一人贴吧】</a>";
+                mailSenderSrvService.sendEmail(mail,subject,text);
+                //注册成功信息
+                msg="注册成功，请前往邮箱激活账号方可登录!";
                 model.addAttribute("msg",msg);
                 return "user_reg";
             }
+            else{
+                msg = "注册失败，用户名或者邮箱已被注册!";
+                model.addAttribute("msg",msg);
+                return "user_reg";
+            }
+        }
+    }
+
+    @RequestMapping("activateStatus")
+    public String activateStatus(String activateCode, Model model, HttpSession session){
+        String msg;
+        int activateCode0 = 0;
+        if(activateCode!=null&&!activateCode.equals("")){
+            activateCode0 = Integer.parseInt(activateCode);
+        }
+        User user = new User();
+        user.setActiveCode(activateCode);
+        user.setStatus(2);
+        boolean isActive = userService.updateUser(user);
+        if(isActive){
+            msg="邮箱激活账号成功!";
+            model.addAttribute("msg",msg);
+            return "user_login";
+        }
+        else{
+            msg = "邮箱激活账号失败，请重试!";
+            model.addAttribute("msg",msg);
+            return "user_login";
         }
     }
 
@@ -131,7 +163,7 @@ public class UserController {
         else {
             user.setId(userId);
             user.setPassword(newPassword);
-            boolean isLogin = userService.changePwd(user);
+            boolean isLogin = userService.updateUser(user);
             if(isLogin){
                 msg="修改密码成功!";
                 model.addAttribute("msg",msg);

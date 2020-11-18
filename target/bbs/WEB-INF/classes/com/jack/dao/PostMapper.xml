@@ -12,7 +12,7 @@
     <select id="queryPost" parameterType="map" resultType="Post">
         select * from post
         <where>
-            <if test="id != null">
+            <if test="id != 0">
                 id = #{id}
             </if>
         </where>

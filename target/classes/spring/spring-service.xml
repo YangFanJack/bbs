@@ -32,6 +32,9 @@
     <bean id="UserServiceImpl" class="com.jack.service.impl.UserServiceImpl">
         <property name="userMapper" ref="userMapper"/>
     </bean>
+    <bean id="MessageServiceImpl" class="com.jack.service.impl.MessageServiceImpl">
+        <property name="messageMapper" ref="messageMapper"/>
+    </bean>
     <bean id="MailSenderSrvServiceImpl" class="com.jack.service.impl.MailSenderSrvServiceImpl">
         <property name="mailSender" ref="mailSender"/>
     </bean>

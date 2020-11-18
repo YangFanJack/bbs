@@ -11,7 +11,7 @@
 }
 .login form{
     width: 320px;
-    margin: 0px auto;
+    margin: 0 auto;
     margin-bottom: 20px;
 }
 .login span{
@@ -21,7 +21,7 @@
     margin-top: 10px;
 }
 .login input{
-    /*float: left;*/
+    float: left;
     margin: 10px 10px 0px 10px;
     opacity: 0.6;
 }

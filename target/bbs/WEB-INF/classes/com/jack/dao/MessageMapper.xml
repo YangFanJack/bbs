@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jack.dao.MessageMapper">
+
+    <!--    开启二级缓存-->
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+
+    <!--增加一个Message-->
+    <insert id="insertMessage" parameterType="Message">
+      insert into `message`(msgCategory,msgContent,msgTime,userId,isRead)
+      values (#{msgCategory}, #{msgContent}, #{msgTime}, #{userId}, #{isRead})
+    </insert>
+
+    <!--更新Message状态-->
+    <update id="updateMessage" parameterType="int">
+        update message
+        set isRead = 2
+        where id = #{id}
+    </update>
+
+    <!--    多消息分页查询-->
+    <select id="queryAllMessage" parameterType="map" resultType="Message">
+        select * from message
+        <where>
+            <if test="msgCategory != null and msgCategory != 0">
+                msgCategory = #{msgCategory}
+            </if>
+        </where>
+        <if test="start != null and pageSize !=null">
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+
+    <!--    计算消息总条数-->
+    <select id="getTotalCount" parameterType="map" resultType="int">
+        select count(message.id) from message
+        <where>
+            <if test="msgCategory != null and msgCategory != 0">
+                msgCategory = #{msgCategory}
+            </if>
+        </where>
+    </select>
+
+</mapper>
